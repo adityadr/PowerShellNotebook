@@ -1,6 +1,7 @@
 function loadScriptDomModules{
     Import-Module -Name SqlServer
-    Add-Type -LiteralPath "C:\Program Files (x86)\Microsoft SQL Server\140\DAC\bin\Microsoft.SqlServer.TransactSql.ScriptDom.dll"
+    $ScriptDom = Join-Path -Path (Get-Module -Name SqlServer).ModuleBase -ChildPath 'Microsoft.SqlServer.TransactSql.ScriptDom.dll'
+    if((Test-Path $ScriptDom) -eq $true ) {Add-Type -LiteralPath $ScriptDom}
 }
 
 # Quick Helper-function to turn the file into a script fragment, using scriptdom.
